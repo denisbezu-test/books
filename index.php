@@ -19,8 +19,6 @@ session_start();
  */
 $router = new Core\Router();
 
-var_dump(\App\Config::getConnectionString());
-
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('init', ['controller' => 'Initializer', 'action' => 'index']);
