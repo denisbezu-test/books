@@ -13,7 +13,6 @@ use PDO;
  */
 class User extends Model
 {
-
     public static $table = 'users';
 
     public static $dbFields = ['email', 'name', 'lastname', 'password'];

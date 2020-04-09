@@ -19,8 +19,11 @@ class Db
     public static function getInstance()
     {
         if (self::$db === null) {
-            $dsn = 'mysql:host=' . Config::DB_HOST . ';dbname=' . Config::DB_NAME . ';charset=utf8';
-            self::$db = new PDO($dsn, Config::DB_USER, Config::DB_PASSWORD);
+            $dsn = 'mysql:host=' . Config::getDbHost() . ';dbname=' . Config::getDbName() . ';charset=utf8';
+            if (!empty(Config::getDbPort())) {
+                $dsn .= ';port=' . Config::getDbPort();
+            }
+            self::$db = new PDO($dsn, Config::getDbUser(), Config::getDbPassword());
 
             // Throw an Exception when an error occurs
             self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

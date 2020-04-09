@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Models\User;
+
 /**
  * Base controller
  *
@@ -94,5 +96,12 @@ abstract class Controller
     {
         header('Location: ' . $url);
         die;
+    }
+
+    protected function redirectHomeIfNotLogged()
+    {
+        if (is_null(User::getLoggedUser())) {
+            $this->redirect('/');
+        }
     }
 }
