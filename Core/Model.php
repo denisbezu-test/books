@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use App\Models\Author;
 use PDO;
 use App\Config;
 
@@ -17,6 +18,8 @@ abstract class Model
 
     public static $dbFields = [];
 
+    protected $id;
+
     public function __construct($id = null)
     {
         if (!is_null($id)) {
@@ -27,7 +30,7 @@ abstract class Model
     protected function initModelFormArray($data)
     {
         if (!empty($data)) {
-            foreach($data as $property => $value) {
+            foreach ($data as $property => $value) {
                 $this->{$property} = $value;
             }
         }
@@ -64,6 +67,15 @@ abstract class Model
 
     public function save()
     {
+        if (empty($this->id)) {
+            return $this->add();
+        }
+
+        return $this->update();
+    }
+
+    public function add()
+    {
         $query = 'INSERT INTO ' . static::$table . '(' . implode(', ', static::$dbFields) . ') VALUES ';
         $query .= '(' . $this->getFieldsInsert() . ');';
 
@@ -72,6 +84,30 @@ abstract class Model
         }
 
         return false;
+    }
+
+    public function update()
+    {
+        $query = 'UPDATE ' . static::$table;
+        $query .= ' SET ' . $this->getFieldsUpdate();
+        $query .= ' WHERE id = :id';
+
+        $stmt = Db::getInstance()->prepare($query);
+
+        return $stmt->execute(['id' => $this->id]);
+    }
+
+    private function getFieldsUpdate()
+    {
+        $fields = '';
+        foreach (static::$dbFields as $index => $dbField) {
+            $fields .= $dbField . '= \'' . $this->{$dbField} . '\'';
+            if (($index + 1) != count(static::$dbFields)) {
+                $fields .= ', ';
+            }
+        }
+
+        return $fields;
     }
 
     private function getFieldsInsert()
@@ -94,5 +130,23 @@ abstract class Model
         $stmt = $db->prepare($query);
 
         return $stmt->execute(['id' => $this->id]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     * @return Model
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 }

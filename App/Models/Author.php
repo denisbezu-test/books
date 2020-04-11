@@ -6,35 +6,15 @@ use Core\Model;
 
 class Author extends Model
 {
-    public static $table = 'users';
+    public static $table = 'authors';
 
     public static $dbFields = ['name', 'lastname'];
-
-    public $id;
 
     public $name;
 
     public $lastname;
 
     //region Get-Set
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     * @return Author
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -73,6 +53,4 @@ class Author extends Model
     }
 
     //endregion
-
-
 }
