@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Publishers{% endblock %}
+
+{% block body %}
+  <div class="d-flex mb-2">
+    <a class="btn btn-success" href="/publishers/create">New publisher</a>
+  </div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Lastname</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for publisher in publishers %}
+      <tr>
+        <th scope="row">{{ publisher.id }}</th>
+        <td>{{ publisher.name }}</td>
+        <td>{{ publisher.dimension }}</td>
+        <td>
+          <div class="d-flex">
+            <div class="edit-wrapper mr-2">
+              <a class="btn btn-warning" href="/publishers/edit?id={{ publisher.id }}">Edit</a>
+            </div>
+            <div class="delete-wrapper">
+              <form method="post" action="/publishers/delete">
+                <input type="hidden" name="id_publisher" value="{{ publisher.id }}">
+                <button class="btn btn-danger"
+                        type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
