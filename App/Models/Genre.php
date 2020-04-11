@@ -10,29 +10,9 @@ class Genre extends Model
 
     public static $dbFields = ['name'];
 
-    public $id;
-
     public $name;
 
     //region Get-Set
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     * @return Genre
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     /**
      * @return mixed

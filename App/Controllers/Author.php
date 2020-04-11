@@ -70,7 +70,7 @@ class Author extends Controller
 
         if (empty($name) || empty($lastname)) {
             return $this->createAction([
-                'error' => 'Verify you input, some parameters are empty'
+                'error' => 'Verify your input, some parameters are empty'
             ]);
         }
         $author = new AuthorModel();

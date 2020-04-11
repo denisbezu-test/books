@@ -35,6 +35,13 @@ $router->add('authors/delete', ['controller' => 'Author', 'action' => 'delete'])
 $router->add('authors/create/submit', ['controller' => 'Author', 'action' => 'createSubmit']);
 $router->add('authors/edit/submit', ['controller' => 'Author', 'action' => 'editSubmit']);
 
+$router->add('genres', ['controller' => 'Genre', 'action' => 'list']);
+$router->add('genres/create', ['controller' => 'Genre', 'action' => 'create']);
+$router->add('genres/edit', ['controller' => 'Genre', 'action' => 'edit']);
+$router->add('genres/delete', ['controller' => 'Genre', 'action' => 'delete']);
+$router->add('genres/create/submit', ['controller' => 'Genre', 'action' => 'createSubmit']);
+$router->add('genres/edit/submit', ['controller' => 'Genre', 'action' => 'editSubmit']);
+
 
 
 $router->add('{controller}/{action}');
