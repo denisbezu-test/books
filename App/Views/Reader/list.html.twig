@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Readers{% endblock %}
+
+{% block body %}
+  <div class="d-flex mb-2">
+    <a class="btn btn-success" href="/readers/create">New reader</a>
+  </div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Lastname</th>
+      <th scope="col">Birthdate</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for reader in readers %}
+      <tr>
+        <th scope="row">{{ reader.id }}</th>
+        <td>{{ reader.name }}</td>
+        <td>{{ reader.lastname }}</td>
+        <td>{{ reader.birthdate }}</td>
+        <td>{{ reader.phone }}</td>
+        <td>
+          <div class="d-flex">
+            <div class="edit-wrapper mr-2">
+              <a class="btn btn-warning" href="/readers/edit?id={{ reader.id }}">Edit</a>
+            </div>
+            <div class="delete-wrapper">
+              <form method="post" action="/readers/delete">
+                <input type="hidden" name="id_reader" value="{{ reader.id }}">
+                <button class="btn btn-danger"
+                        type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

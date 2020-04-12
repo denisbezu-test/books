@@ -10,8 +10,6 @@ class Reader extends Model
 
     public static $dbFields = ['name', 'lastname', 'birthdate', 'phone'];
 
-    public $id;
-
     public $name;
 
     public $lastname;
@@ -21,24 +19,6 @@ class Reader extends Model
     public $phone;
 
     //region Get-Set
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     * @return Reader
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     /**
      * @return mixed

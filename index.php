@@ -49,6 +49,13 @@ $router->add('publishers/delete', ['controller' => 'Publisher', 'action' => 'del
 $router->add('publishers/create/submit', ['controller' => 'Publisher', 'action' => 'createSubmit']);
 $router->add('publishers/edit/submit', ['controller' => 'Publisher', 'action' => 'editSubmit']);
 
+$router->add('readers', ['controller' => 'Reader', 'action' => 'list']);
+$router->add('readers/create', ['controller' => 'Reader', 'action' => 'create']);
+$router->add('readers/edit', ['controller' => 'Reader', 'action' => 'edit']);
+$router->add('readers/delete', ['controller' => 'Reader', 'action' => 'delete']);
+$router->add('readers/create/submit', ['controller' => 'Reader', 'action' => 'createSubmit']);
+$router->add('readers/edit/submit', ['controller' => 'Reader', 'action' => 'editSubmit']);
+
 
 
 $router->add('{controller}/{action}');
