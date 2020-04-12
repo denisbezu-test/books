@@ -175,4 +175,16 @@ class Book extends Model
     }
 
     //endregion
+
+    public static function getDisplayList()
+    {
+        $books = self::getAll();
+        foreach ($books as &$book) {
+            $book['author'] = new Author($book['id_author']);
+            $book['genre'] = new Genre($book['id_genre']);
+            $book['publisher'] = new Publisher($book['id_publisher']);
+        }
+
+        return $books;
+    }
 }

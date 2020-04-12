@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+
+{% block title %}book edit{% endblock %}
+
+{% block body %}
+  {% if error is defined %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endif %}
+  <form action="/books/edit/submit"
+        method="post"
+  >
+    <div class="form-group">
+      <input type="hidden" name="id" value="{{ book.id }}">
+      <label for="name">Name</label>
+      <input type="text"
+             name="name"
+             value="{{ book.name }}"
+             placeholder="Name"
+             class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="name">Author</label>
+      <select name="id_author" class="form-control">
+        {% for author in authors %}
+          <option {% if author.id == book.id_author %}selected{% endif %}
+                  value="{{ author.id }}">{{ author.name }} {{ author.lastname }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Genre</label>
+      <select name="id_genre" class="form-control">
+        {% for genre in genres %}
+          <option {% if genre.id == book.id_genre %}selected{% endif %}
+                  value="{{ genre.id }}">{{ genre.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Publisher</label>
+      <select name="id_publisher" class="form-control">
+        {% for publisher in publishers %}
+          <option {% if publisher.id == book.id_publisher %}selected{% endif %}
+                  value="{{ publisher.id }}">{{ publisher.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Year</label>
+      <input type="number"
+             name="year"
+             value="{{ book.year }}"
+             placeholder="Year"
+             class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="name">Pages</label>
+      <input type="number"
+             name="pages"
+             value="{{ book.pages }}"
+             placeholder="Pages"
+             class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="name">Quantity</label>
+      <input type="number"
+             value="{{ book.quantity }}"
+             name="quantity"
+             placeholder="Quantity"
+             class="form-control"/>
+    </div>
+    <div class="form-group d-flex justify-content-end">
+      <button type="submit"
+              class="btn btn-success">
+        Submit
+      </button>
+    </div>
+  </form>
+{% endblock %}

@@ -56,6 +56,13 @@ $router->add('readers/delete', ['controller' => 'Reader', 'action' => 'delete'])
 $router->add('readers/create/submit', ['controller' => 'Reader', 'action' => 'createSubmit']);
 $router->add('readers/edit/submit', ['controller' => 'Reader', 'action' => 'editSubmit']);
 
+$router->add('books', ['controller' => 'Book', 'action' => 'list']);
+$router->add('books/create', ['controller' => 'Book', 'action' => 'create']);
+$router->add('books/edit', ['controller' => 'Book', 'action' => 'edit']);
+$router->add('books/delete', ['controller' => 'Book', 'action' => 'delete']);
+$router->add('books/create/submit', ['controller' => 'Book', 'action' => 'createSubmit']);
+$router->add('books/edit/submit', ['controller' => 'Book', 'action' => 'editSubmit']);
+
 
 
 $router->add('{controller}/{action}');
