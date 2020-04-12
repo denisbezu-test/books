@@ -58,7 +58,7 @@ class Rent extends Controller
         $idRent = $this->getPost('id_rent');
         if (!empty($idRent)) {
             $rent = new RentModel($idRent);
-            $rent->setIsReturned(true);
+            $rent->setIsReturned(1);
             $rent->save();
             $book = new \App\Models\Book($rent->getIdBook());
             $book->setQuantity($book->getQuantity() + 1);
@@ -95,7 +95,7 @@ class Rent extends Controller
         $rent->setIdBook($idBook);
         $rent->setIdReader($idReader);
         $rent->setDateRent($dateRent);
-        $rent->setIsReturned($isReturned);
+        $rent->setIsReturned((int)$isReturned);
         $book = new \App\Models\Book($idBook);
         if ($isReturned == true && $oldReturned == false) {
             $book->setQuantity($book->getQuantity() + 1);
