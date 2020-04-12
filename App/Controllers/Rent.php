@@ -130,7 +130,7 @@ class Rent extends Controller
         $rent->setIdBook($idBook);
         $rent->setIdReader($idReader);
         $rent->setDateRent($dateRent);
-        $rent->setIsReturned(false);
+        $rent->setIsReturned(0);
         $rent->save();
 
         //rent book
