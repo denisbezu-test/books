@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Rent edit{% endblock %}
+
+{% block body %}
+  {% if error is defined %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endif %}
+  <form action="/rents/edit/submit"
+        method="post"
+  >
+    <div class="form-group">
+      <input type="hidden" name="id" value="{{ rent.id }}">
+      <label for="name">Book</label>
+      <select name="id_book" class="form-control">
+        {% for book in books %}
+          <option {% if book.id == rent.id_book %}selected{% endif %}
+                  value="{{ book.id }}">{{ book.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Reader</label>
+      <select name="id_reader" class="form-control">
+        {% for reader in readers %}
+          <option {% if reader.id == rent.id_reader %}selected{% endif %}
+                  value="{{ reader.id }}">{{ reader.name }} {{ reader.lastname }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Date rent</label>
+      <input type="date"
+             value="{{ rent.date_rent }}"
+             name="date_rent"
+             placeholder="Date rent"
+             class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="name">Is returned</label>
+      <input type="checkbox"
+             id="is_returned"
+             name="is_returned"
+             {% if rent.is_returned %}checked value="1" {% else %}value="0"{% endif %}
+      />
+    </div>
+    <div class="form-group d-flex justify-content-end">
+      <button type="submit"
+              class="btn btn-success">
+        Submit
+      </button>
+    </div>
+  </form>
+  <script>
+    document.getElementById('is_returned').onchange = function () {
+      if (this.checked === true) {
+        this.value = 1;
+      } else {
+        this.value = 0;
+      }
+    };
+  </script>
+{% endblock %}
+

@@ -63,7 +63,13 @@ $router->add('books/delete', ['controller' => 'Book', 'action' => 'delete']);
 $router->add('books/create/submit', ['controller' => 'Book', 'action' => 'createSubmit']);
 $router->add('books/edit/submit', ['controller' => 'Book', 'action' => 'editSubmit']);
 
-
+$router->add('rents', ['controller' => 'Rent', 'action' => 'list']);
+$router->add('rents/create', ['controller' => 'Rent', 'action' => 'create']);
+$router->add('rents/edit', ['controller' => 'Rent', 'action' => 'edit']);
+$router->add('rents/delete', ['controller' => 'Rent', 'action' => 'delete']);
+$router->add('rents/return', ['controller' => 'Rent', 'action' => 'return']);
+$router->add('rents/create/submit', ['controller' => 'Rent', 'action' => 'createSubmit']);
+$router->add('rents/edit/submit', ['controller' => 'Rent', 'action' => 'editSubmit']);
 
 $router->add('{controller}/{action}');
     

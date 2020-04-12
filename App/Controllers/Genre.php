@@ -33,12 +33,18 @@ class Genre extends Controller
     public function deleteAction()
     {
         $idGenre = $this->getPost('id_genre');
-        if (!empty($idGenre)) {
-            $genre = new GenreModel($idGenre);
-            $genre->delete();
-        }
+        try {
+            if (!empty($idGenre)) {
+                $genre = new GenreModel($idGenre);
+                $genre->delete();
+            }
 
-        $this->redirect('/genres');
+            $this->redirect('/genres');
+        } catch (\Exception $e) {
+            return $this->listAction([
+                'error' => 'Error while deleting object, object is used somewhere'
+            ]);
+        }
     }
 
     public function createAction($args = [])

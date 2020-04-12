@@ -8,9 +8,7 @@ class Rent extends Model
 {
     public static $table = 'rents';
 
-    public static $dbFields = ['id_book', 'id_reader', 'date_rent', 'date_return'];
-
-    public $id;
+    public static $dbFields = ['id_book', 'id_reader', 'date_rent', 'is_returned'];
 
     public $id_book;
 
@@ -18,27 +16,9 @@ class Rent extends Model
 
     public $date_rent;
 
-    public $date_return;
+    public $is_returned;
 
     //region Get-Set
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     * @return Rent
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -97,20 +77,29 @@ class Rent extends Model
     /**
      * @return mixed
      */
-    public function getDateReturn()
+    public function getIsReturned()
     {
-        return $this->date_return;
+        return $this->is_returned;
     }
 
     /**
-     * @param mixed $date_return
-     * @return Rent
+     * @param mixed $is_returned
      */
-    public function setDateReturn($date_return)
+    public function setIsReturned($is_returned)
     {
-        $this->date_return = $date_return;
-        return $this;
+        $this->is_returned = $is_returned;
     }
 
     //endregion
+
+    public static function getDisplayList()
+    {
+        $rents = self::getAll();
+        foreach ($rents as &$rent) {
+            $rent['book'] = new Book($rent['id_book']);
+            $rent['reader'] = new Reader($rent['id_reader']);
+        }
+
+        return $rents;
+    }
 }

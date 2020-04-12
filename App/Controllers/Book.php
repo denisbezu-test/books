@@ -35,12 +35,18 @@ class Book extends Controller
     public function deleteAction()
     {
         $idBook = $this->getPost('id_book');
-        if (!empty($idBook)) {
-            $book = new BookModel($idBook);
-            $book->delete();
-        }
+        try {
+            if (!empty($idBook)) {
+                $book = new BookModel($idBook);
+                $book->delete();
+            }
 
-        $this->redirect('/books');
+            $this->redirect('/books');
+        } catch (\Exception $e) {
+            return $this->listAction([
+                'error' => 'Error while deleting object, object is used somewhere'
+            ]);
+        }
     }
 
     public function createAction($args = [])

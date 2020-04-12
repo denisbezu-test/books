@@ -33,12 +33,19 @@ class Publisher extends Controller
     public function deleteAction()
     {
         $idPublisher = $this->getPost('id_publisher');
-        if (!empty($idPublisher)) {
-            $publisher = new PublisherModel($idPublisher);
-            $publisher->delete();
+        try {
+            if (!empty($idPublisher)) {
+                $publisher = new PublisherModel($idPublisher);
+                $publisher->delete();
+            }
+
+            $this->redirect('/publishers');
+        } catch (\Exception $e) {
+            return $this->listAction([
+                'error' => 'Error while deleting object, object is used somewhere'
+            ]);
         }
 
-        $this->redirect('/publishers');
     }
 
     public function createAction($args = [])

@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Rents{% endblock %}
+
+{% block body %}
+  {% if error is defined %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endif %}
+  <div class="d-flex mb-2">
+    <a class="btn btn-success" href="/rents/create">New rent</a>
+  </div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Book</th>
+      <th scope="col">Reader</th>
+      <th scope="col">Date rent</th>
+      <th scope="col">Is returned</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for rent in rents %}
+      <tr>
+        <th scope="row">{{ rent.id }}</th>
+        <td>{{ rent.book.name }}</td>
+        <td>{{ rent.reader.name }} {{ rent.reader.lastname }}</td>
+        <td>{{ rent.date_rent }}</td>
+        <td>{% if rent.is_returned == 1 %}Yes{% else %}No{% endif %}</td>
+        <td>
+          <div class="d-flex">
+            <div class="edit-wrapper mr-2">
+              <a class="btn btn-warning" href="/rents/edit?id={{ rent.id }}">Edit</a>
+            </div>
+            <div class="delete-wrapper">
+              <form method="post" action="/rents/delete">
+                <input type="hidden" name="id_rent" value="{{ rent.id }}">
+                <button class="btn btn-danger"
+                        type="submit">Delete
+                </button>
+              </form>
+            </div>
+            {% if not rent.is_returned %}
+              <div class="return-wrapper ml-2">
+                <form method="post" action="/rents/return">
+                  <input type="hidden" name="id_rent" value="{{ rent.id }}">
+                  <button class="btn btn-primary"
+                          type="submit">Return
+                  </button>
+                </form>
+              </div>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

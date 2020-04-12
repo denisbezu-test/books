@@ -187,4 +187,11 @@ class Book extends Model
 
         return $books;
     }
+
+    public static function getBooksForRent()
+    {
+        return array_filter(self::getAll(), function ($book) {
+            return $book['quantity'] > 0;
+        });
+    }
 }

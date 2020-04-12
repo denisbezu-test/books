@@ -32,12 +32,18 @@ class Author extends Controller
     public function deleteAction()
     {
         $idAuthor = $this->getPost('id_author');
-        if (!empty($idAuthor)) {
-            $author = new AuthorModel($idAuthor);
-            $author->delete();
-        }
+        try {
+            if (!empty($idAuthor)) {
+                $author = new AuthorModel($idAuthor);
+                $author->delete();
+            }
 
-        $this->redirect('/authors');
+            $this->redirect('/authors');
+        } catch (\Exception $e) {
+            return $this->listAction([
+                'error' => 'Error while deleting object, object is used somewhere'
+            ]);
+        }
     }
 
     public function createAction($args = [])

@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Rent new{% endblock %}
+
+{% block body %}
+  {% if error is defined %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endif %}
+  <form action="/rents/create/submit"
+        method="post"
+  >
+    <div class="form-group">
+      <label for="name">Book</label>
+      <select name="id_book" class="form-control">
+        {% for book in books %}
+          <option value="{{ book.id }}">{{ book.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Reader</label>
+      <select name="id_reader" class="form-control">
+        {% for reader in readers %}
+          <option value="{{ reader.id }}">{{ reader.name }} {{ reader.lastname }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Date rent</label>
+      <input type="date"
+             name="date_rent"
+             placeholder="Date rent"
+             class="form-control"/>
+    </div>
+
+    <div class="form-group d-flex justify-content-end">
+      <button type="submit"
+              class="btn btn-success">
+        Submit
+      </button>
+    </div>
+  </form>
+{% endblock %}

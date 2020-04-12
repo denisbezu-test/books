@@ -34,8 +34,6 @@ class DbInitializer
             );
         ';
 
-        $userId = User::createUser('denys.bezu@gmail.com', 'kb230699');
-
         return Db::getInstance()->exec($query);
     }
 
@@ -127,7 +125,7 @@ class DbInitializer
                 id_book INT NULL DEFAULT NULL,
                 id_reader INT NULL DEFAULT NULL,
                 date_rent date NOT NULL,
-                date_return date NULL DEFAULT NULL,
+                is_returned BOOL NULL DEFAULT 0,
                 FOREIGN KEY (id_book) REFERENCES books(id),
                 FOREIGN KEY (id_reader) REFERENCES readers(id)
             );

@@ -3,6 +3,11 @@
 {% block title %}Authors{% endblock %}
 
 {% block body %}
+  {% if error is defined %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endif %}
   <div class="d-flex mb-2">
     <a class="btn btn-success" href="/authors/create">New author</a>
   </div>

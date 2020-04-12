@@ -33,12 +33,18 @@ class Reader extends Controller
     public function deleteAction()
     {
         $idReader = $this->getPost('id_reader');
-        if (!empty($idReader)) {
-            $reader = new ReaderModel($idReader);
-            $reader->delete();
-        }
+        try {
+            if (!empty($idReader)) {
+                $reader = new ReaderModel($idReader);
+                $reader->delete();
+            }
 
-        $this->redirect('/readers');
+            $this->redirect('/readers');
+        } catch (\Exception $e) {
+            return $this->listAction([
+                'error' => 'Error while deleting object, object is used somewhere'
+            ]);
+        }
     }
 
     public function createAction($args = [])
