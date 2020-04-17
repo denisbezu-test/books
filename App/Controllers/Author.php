@@ -8,6 +8,12 @@ use \App\Models\Author as AuthorModel;
 
 class Author extends Controller
 {
+    public function __construct($route_params)
+    {
+        parent::__construct($route_params);
+        $this->redirectHomeIfNotLogged();
+    }
+///afficher la liste
     public function listAction($args = [])
     {
         $args = array_merge($args, [
@@ -15,7 +21,7 @@ class Author extends Controller
         ]);
         View::renderTemplate('Author/list.html.twig', $args);
     }
-
+///modifier l'affichage
     public function editAction($args = [])
     {
         $idAuthor = $this->getRequestByKey('id');
@@ -28,7 +34,7 @@ class Author extends Controller
 
         View::renderTemplate('Author/edit.html.twig', $args);
     }
-
+///supprimer
     public function deleteAction()
     {
         $idAuthor = $this->getPost('id_author');
@@ -50,7 +56,7 @@ class Author extends Controller
     {
         View::renderTemplate('Author/create.html.twig', $args);
     }
-
+///enregistrer les modifications
     public function editSubmitAction()
     {
         $id = $this->getPost('id');
@@ -69,6 +75,10 @@ class Author extends Controller
         $this->redirect('/authors');
     }
 
+
+    /**
+     * enregistrer la creation
+     */
     public function createSubmitAction()
     {
         $name = $this->getPost('name');

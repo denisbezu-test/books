@@ -4,7 +4,7 @@
  * Composer
  */
 require __DIR__ . '/vendor/autoload.php';
-
+//pour avoir les namespaces
 /**
  * Error and Exception handling
  */

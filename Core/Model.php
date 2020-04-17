@@ -27,7 +27,7 @@ abstract class Model
         }
     }
 
-    protected function initModelFormArray($data)
+    protected function initModelFormArray($data) //initialisation d'objets
     {
         if (!empty($data)) {
             foreach ($data as $property => $value) {

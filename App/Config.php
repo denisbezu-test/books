@@ -19,7 +19,7 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'ksenia';
+    const DB_NAME = 'books';
 
     /**
      * Database port
@@ -37,7 +37,7 @@ class Config
      * Database password
      * @var string
      */
-    const DB_PASSWORD = 'root';
+    const DB_PASSWORD = '';
 
     /**
      * Show or hide error messages on screen
